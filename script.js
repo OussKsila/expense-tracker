@@ -17,6 +17,7 @@ const resetBtn = document.getElementById('reset-btn');
 // Dashboard
 const totalIncomeEl = document.getElementById('total-income');
 const totalExpensesEl = document.getElementById('total-expenses');
+const totalSharedEl = document.getElementById('total-shared');
 const remainingBudgetEl = document.getElementById('remaining-budget');
 
 // ===== LocalStorage =====
@@ -36,11 +37,14 @@ function loadState() {
 // ===== Calculations =====
 function calculateTotals() {
     let myShareOfExpenses = 0;
+    let totalSharedExpenses = 0;
 
     state.expenses.forEach(expense => {
         if (expense.type === 'shared') {
             // 50% split - I only pay half
             myShareOfExpenses += expense.amount / 2;
+            // Track total shared expenses (full amount)
+            totalSharedExpenses += expense.amount;
         } else {
             // Personal - I pay 100%
             myShareOfExpenses += expense.amount;
@@ -52,6 +56,7 @@ function calculateTotals() {
     return {
         income: state.income,
         expenses: myShareOfExpenses,
+        shared: totalSharedExpenses,
         remaining: remaining
     };
 }
@@ -65,6 +70,7 @@ function renderDashboard() {
     const totals = calculateTotals();
     totalIncomeEl.textContent = formatCurrency(totals.income);
     totalExpensesEl.textContent = formatCurrency(totals.expenses);
+    totalSharedEl.textContent = formatCurrency(totals.shared);
     remainingBudgetEl.textContent = formatCurrency(totals.remaining);
 
     // Color code remaining

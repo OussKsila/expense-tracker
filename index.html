@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="app-container">
         <!-- Header -->
@@ -34,6 +36,13 @@
                     <span class="card-value" id="total-expenses">0 €</span>
                 </div>
             </div>
+            <div class="card card-shared">
+                <div class="card-icon">👫</div>
+                <div class="card-content">
+                    <span class="card-label">Total Dépenses Communes</span>
+                    <span class="card-value" id="total-shared">0 €</span>
+                </div>
+            </div>
             <div class="card card-remaining">
                 <div class="card-icon">✨</div>
                 <div class="card-content">
@@ -43,43 +52,51 @@
             </div>
         </section>
 
-        <!-- Income Form -->
-        <section class="form-section">
-            <h2>💵 Salaire du mois</h2>
-            <form id="income-form" class="form-row">
-                <input type="number" id="income-amount" placeholder="Montant (ex: 2500)" step="0.01" required>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </form>
-        </section>
+        <!-- Main Content - Two Columns -->
+        <div class="main-content">
+            <!-- Left Column - Forms -->
+            <div class="left-column">
+                <!-- Income Form -->
+                <section class="form-section">
+                    <h2>💵 Salaire du mois</h2>
+                    <form id="income-form" class="form-row">
+                        <input type="number" id="income-amount" placeholder="Montant (ex: 2500)" step="0.01" required>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </form>
+                </section>
 
-        <!-- Expense Form -->
-        <section class="form-section">
-            <h2>➕ Ajouter une dépense</h2>
-            <form id="expense-form" class="expense-form">
-                <input type="text" id="expense-description" placeholder="Description (ex: Loyer)" required>
-                <input type="number" id="expense-amount" placeholder="Montant total" step="0.01" required>
-                <div class="type-selector">
-                    <label class="type-option">
-                        <input type="radio" name="expense-type" value="personal" checked>
-                        <span class="type-label">🧍 Personnel (100%)</span>
-                    </label>
-                    <label class="type-option">
-                        <input type="radio" name="expense-type" value="shared">
-                        <span class="type-label">👫 Partagé (50%)</span>
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Ajouter</button>
-            </form>
-        </section>
+                <!-- Expense Form -->
+                <section class="form-section">
+                    <h2>➕ Ajouter une dépense</h2>
+                    <form id="expense-form" class="expense-form">
+                        <input type="text" id="expense-description" placeholder="Description (ex: Loyer)" required>
+                        <input type="number" id="expense-amount" placeholder="Montant total" step="0.01" required>
+                        <div class="type-selector">
+                            <label class="type-option">
+                                <input type="radio" name="expense-type" value="personal" checked>
+                                <span class="type-label">🧍 Personnel (100%)</span>
+                            </label>
+                            <label class="type-option">
+                                <input type="radio" name="expense-type" value="shared">
+                                <span class="type-label">👫 Partagé (50%)</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </form>
+                </section>
+            </div>
 
-        <!-- Expense List -->
-        <section class="list-section">
-            <h2>📋 Mes dépenses</h2>
-            <ul id="expense-list" class="expense-list">
-                <!-- Expenses will be added here dynamically -->
-            </ul>
-            <p id="empty-message" class="empty-message">Aucune dépense enregistrée</p>
-        </section>
+            <!-- Right Column - Expense List -->
+            <div class="right-column">
+                <section class="list-section">
+                    <h2>📋 Mes dépenses</h2>
+                    <ul id="expense-list" class="expense-list">
+                        <!-- Expenses will be added here dynamically -->
+                    </ul>
+                    <p id="empty-message" class="empty-message">Aucune dépense enregistrée</p>
+                </section>
+            </div>
+        </div>
 
         <!-- Reset Button -->
         <footer class="footer">
@@ -89,4 +106,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

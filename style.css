@@ -9,6 +9,7 @@
     --accent-red: #ff6b6b;
     --accent-blue: #4facfe;
     --accent-purple: #a855f7;
+    --accent-orange: #f59e0b;
     --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     --radius: 16px;
     --radius-sm: 8px;
@@ -28,45 +29,55 @@ body {
     line-height: 1.6;
 }
 
-/* ===== App Container ===== */
+/* ===== App Container - FULL WIDTH ===== */
 .app-container {
-    max-width: 600px;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 2rem 3rem;
 }
 
 /* ===== Header ===== */
 .header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .header h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
     background: linear-gradient(90deg, #fff, var(--accent-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
 }
 
 .subtitle {
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 1.1rem;
 }
 
 /* ===== Dashboard Cards ===== */
 .dashboard {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+@media (max-width: 1000px) {
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 600px) {
     .dashboard {
         grid-template-columns: 1fr;
+    }
+    .app-container {
+        padding: 1.5rem 1rem;
     }
 }
 
@@ -75,10 +86,10 @@ body {
     backdrop-filter: blur(12px);
     border: 1px solid var(--card-border);
     border-radius: var(--radius);
-    padding: 1.25rem;
+    padding: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -88,7 +99,7 @@ body {
 }
 
 .card-icon {
-    font-size: 1.75rem;
+    font-size: 2rem;
 }
 
 .card-content {
@@ -97,20 +108,41 @@ body {
 }
 
 .card-label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .card-value {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
 }
 
 .card-income .card-value { color: var(--accent-green); }
 .card-expenses .card-value { color: var(--accent-red); }
+.card-shared .card-value { color: var(--accent-orange); }
 .card-remaining .card-value { color: var(--accent-blue); }
+
+/* ===== Main Layout - Two Columns ===== */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 900px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.left-column,
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
 /* ===== Form Sections ===== */
 .form-section {
@@ -119,11 +151,10 @@ body {
     border: 1px solid var(--card-border);
     border-radius: var(--radius);
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
 }
 
 .form-section h2 {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--text-secondary);
@@ -146,7 +177,7 @@ input[type="number"] {
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid var(--card-border);
     border-radius: var(--radius-sm);
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1rem;
     color: var(--text-primary);
     font-size: 1rem;
     transition: border-color 0.2s ease, background 0.2s ease;
@@ -180,7 +211,7 @@ input:focus {
 .type-label {
     display: block;
     text-align: center;
-    padding: 0.75rem;
+    padding: 0.85rem;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid var(--card-border);
     border-radius: var(--radius-sm);
@@ -201,7 +232,7 @@ input:focus {
 
 /* ===== Buttons ===== */
 .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.85rem 1.5rem;
     border: none;
     border-radius: var(--radius-sm);
     font-size: 1rem;
@@ -242,11 +273,12 @@ input:focus {
     border: 1px solid var(--card-border);
     border-radius: var(--radius);
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    flex: 1;
+    min-height: 300px;
 }
 
 .list-section h2 {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--text-secondary);
@@ -254,6 +286,22 @@ input:focus {
 
 .expense-list {
     list-style: none;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.expense-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.expense-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.expense-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
 }
 
 .expense-item {
@@ -347,7 +395,8 @@ input:focus {
 /* ===== Footer ===== */
 .footer {
     text-align: center;
-    padding-top: 1rem;
+    padding-top: 2rem;
+    margin-top: 1rem;
 }
 
 /* ===== Animations ===== */
